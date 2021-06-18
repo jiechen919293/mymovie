@@ -1,28 +1,48 @@
-import React,{Component} from 'react';
-// import Movie from './components/movie';
+import React,{Component, useState} from 'react';
+import Header from './components/header';
+import SearchResults from './components/searchResults';
 import MovieList from './components/movieList';
 import WatchList from './components/watchList'
 function App() {
-  return (
-    <>
+  const[query,setQuery]=useState('');
+  const[moviesPopul,setMoviesPopul]=useState([]);
+  const[searchMovies,setSearcheMovies]=useState([]);
+ const getMoviesPopul = async (e) => {
+    e.preventDefault()
+    let key = this.state.inputValue
+    const url = `https://api.themoviedb.org/3/search/movie?api_key=7b94aeb4b9c0dd930c28ea14fa3c1fcb&language=en-US&query=${key}&page=1`
+    fetch(url)
+      .then((result) => result.json())
+      .then((result) => {
+        if (result) {
+          this.setState({ results: result.results });
+          console.log(this.state.results);
+        }
+      })
+  }
+  
+ const handleChange=(e)=>{
+   
+    console.log(e.target.value);
+  }
+const handleFavor=(id)=>{
+  
+}
+
+  return (<>
       <div id="root">
-        <header className="header">
-          <a href="/"><img src="https://fontmeme.com/permalink/190707/fd4735271a0d997cbe19a04408c896fc.png" alt="netflix-font" border="0" /></a>
-          <div id="navigation" className="navigation">
-            <nav>
-              <ul>
-                <li><a href="/my-watch-list">Watch List</a></li>
-              </ul>
-            </nav>
-          </div>
-          <form id="search" className="search">
-            <input type="search" placeholder="Search for a title..." value="" />
-            <div className="searchResults">
-              
-            </div>
-          </form>
-        </header>
-        <MovieList/>
+        <Header value={query}
+          handleSubmit={getMoviesPopul}
+          handleChange={handleChange}
+        />
+      <SearchResults
+        searchMovies={searchMovies}
+        handChangeFavor={handleFavor}
+      />
+        <MovieList 
+        moviesPopul={moviesPopul}
+        handChangeFavor={handleFavor}
+        />
         <WatchList/>
 </div>
     </>
