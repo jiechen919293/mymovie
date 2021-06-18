@@ -1,5 +1,45 @@
-
+import Movie from './movie';
 const MovieList = () => {
+    const testMovie = [{
+        "adult": false,
+        "backdrop_path": "/9VEOQvCnd8T8wILgyqjKgyhALw4.jpg",
+        "genre_ids": [
+            28,
+            80,
+            53
+        ],
+        "id": 324542,
+        "original_language": "en",
+        "original_title": "Sleepless",
+        "overview": "Undercover Las Vegas police officer Vincent Downs, who has got a lot of enemies, is caught in a high stakes web of corrupt cops and the mob-controlled casino underground. When a heist goes wrong, a crew of homicidal gangsters gets T, Downs’ teenage son. In one sleepless night, he will have to rescue his son T (who they got), evade an internal affairs investigation and bring the kidnappers to justice.",
+        "popularity": 21.481,
+        "poster_path": "/9WkUSY33MDPGmz0vtzbsfaxTHVa.jpg",
+        "release_date": "2017-01-12",
+        "title": "Sleepless",
+        "video": false,
+        "vote_average": 5.9,
+        "vote_count": 1001
+    },
+        {
+            "adult": false,
+            "backdrop_path": "/8gN4y9ijiYHIdcvWVHFgqumF5W1.jpg",
+            "genre_ids": [
+                35,
+                18,
+                10749
+            ],
+            "id": 858,
+            "original_language": "en",
+            "original_title": "Sleepless in Seattle",
+            "overview": "Desperate to find his dad Sam a date, a young boy calls into a radio show and catches the attention of Annie, a journalist who wants to meet Sam atop the Empire State Building.",
+            "popularity": 10.674,
+            "poster_path": "/iLWsLVrfkFvOXOG9PbUAYg7AK3E.jpg",
+            "release_date": "1993-06-24",
+            "title": "Sleepless in Seattle",
+            "video": false,
+            "vote_average": 6.7,
+            "vote_count": 1650
+        }]
     return ( <>
         <div className="titleList">
             <div className="title">
@@ -22,62 +62,14 @@ const MovieList = () => {
                             <div><i className="fa fa-fw fa-plus"></i><i className="fa fa-fw fa-check"></i></div>
                         </div>
                     </div>
-                    <div className="movie">
-                        <a href="/details/93484"><img src="https://image.tmdb.org/t/p/w500/9yxep7oJdkj3Pla9TD9gKflRApY.jpg" alt="Movie poster" />
-                            <div className="overlay">
-                                <div className="title">Jupiter's Legacy</div>
-                                <div className="rating">7.4/10</div>
-                                <div className="plot">
-                                    When the world's first generation of superheroes received their powers in the 1930s become the revered elder guard in the present, their superpowered children struggle to live up to the legendary feats of their parents.
-                                </div>
-                            </div>
-                        </a>
-                        <div data-toggled="true" className="listToggle">
-                            <div><i className="fa fa-fw fa-plus"></i><i className="fa fa-fw fa-check"></i></div>
-                        </div>
-                    </div>
-                    <div className="movie">
-                        <a href="/details/1416"><img src="https://image.tmdb.org/t/p/w500/clnyhPqj1SNgpAdeSS6a6fwE6Bo.jpg" alt="Movie poster" />
-                            <div className="overlay">
-                                <div className="title">Grey's Anatomy</div>
-                                <div className="rating">8.2/10</div>
-                                <div className="plot">Follows the personal and professional lives of a group of doctors at Seattle’s Grey Sloan Memorial Hospital.</div>
-                            </div>
-                        </a>
-                        <div data-toggled="true" className="listToggle">
-                            <div><i className="fa fa-fw fa-plus"></i><i className="fa fa-fw fa-check"></i></div>
-                        </div>
-                    </div>
-                    <div className="movie">
-                        <a href="/details/63174"><img src="https://image.tmdb.org/t/p/w500/4EYPN5mVIhKLfxGruy7Dy41dTVn.jpg" alt="Movie poster" />
-                            <div className="overlay">
-                                <div className="title">Lucifer</div>
-                                <div className="rating">8.5/10</div>
-                                <div className="plot">
-                                    Bored and unhappy as the Lord of Hell, Lucifer Morningstar abandoned his throne and retired to Los Angeles, where he has teamed up with LAPD detective Chloe Decker to take down criminals.&nbsp;But the longer he's away from the underworld, the greater
-                                    the threat that the worst of humanity could escape.
-                                </div>
-                            </div>
-                        </a>
-                        <div data-toggled="true" className="listToggle">
-                            <div><i className="fa fa-fw fa-plus"></i><i className="fa fa-fw fa-check"></i></div>
-                        </div>
-                    </div>
-                    <div className="movie">
-                        <a href="/details/79008"><img src="https://image.tmdb.org/t/p/w500/34FaY8qpjBAVysSfrJ1l7nrAQaD.jpg" alt="Movie poster" />
-                            <div className="overlay">
-                                <div className="title">Luis Miguel: The Series</div>
-                                <div className="rating">8.1/10</div>
-                                <div className="plot">
-                                    The series dramatizes the life story of Mexican superstar singer Luis Miguel, who has captivated audiences in Latin America and beyond for decades.
-                                </div>
-                            </div>
-                        </a>
-                        <div data-toggled="false" className="listToggle">
-                            <div><i className="fa fa-fw fa-plus"></i><i className="fa fa-fw fa-check"></i></div>
-                        </div>
-                    </div>
-                </div>
+                    {testMovie.map((movie) => {
+                        return (
+                            <Movie key={movie.id}
+                                movie={movie}
+                            // favourite={favouriteList.includes(movie.id)}
+                            // handleChangeFavor={handleChangeFavor}
+                            />)
+                    })}</div>
             </div>
         </div>
         <div className="titleList">
