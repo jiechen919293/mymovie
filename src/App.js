@@ -9,6 +9,7 @@ function App() {
   const [moviePopul, setMoviePopul] = useState([]);
   const [searchMovies, setSearchMovies] = useState([]);
   const [watchList, setWatchList] = useState([]);
+
   const getMainPageData = async () => {
     const providerId = [8, 230, 337, 350];
     const APIkey = '7b94aeb4b9c0dd930c28ea14fa3c1fcb'
@@ -27,6 +28,8 @@ function App() {
     // console.log(newdata);
     setMoviePopul(newdata)
   }
+
+
   useEffect(() => {
     getMainPageData();
   }, [])
@@ -55,18 +58,17 @@ function App() {
     }
   }
   const handleWatch = (movie) => {
-    // console.log(movie);
-
-    if ((watchList.findIndex((item) => item.id === movie.id)) !== -1) {
-      setWatchList(watchList.filter((item) => item.id !== movie.id))
-      localStorage.setItem('watchList', JSON.stringify(watchList))
-      return
+      let tempList = [...watchList];
+      let index = watchList.findIndex((item) => {
+      return item.id === movie.id;
+    })
+    if (index === -1) { tempList = [...watchList, movie]; } 
+    else {
+      tempList.splice(index,1)
     }
-
-    setWatchList([...watchList, movie]);
+    setWatchList(tempList)
     localStorage.setItem('watchList', JSON.stringify(watchList))
-    console.log(watchList);
-
+    // console.log(watchList);
   }
 
   return (<>
@@ -79,11 +81,13 @@ function App() {
       <Switch>
         <Route exact path='/'>
           <SearchResults
+            watchList={watchList}
             searchMovies={searchMovies}
             handleWatch={handleWatch}
           />
 
           <MovieList
+            watchList={watchList}
             moviePopul={moviePopul}
             handleWatch={handleWatch}
           />
