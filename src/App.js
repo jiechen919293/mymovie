@@ -8,7 +8,7 @@ function App() {
   const [query, setQuery] = useState('');
   const [moviePopul, setMoviePopul] = useState([]);
   const [searchMovies, setSearchMovies] = useState([]);
-  const [watchList, setWatchList] = useState([]);
+  const [watchList, setWatchList] = useState(JSON.parse(localStorage.getItem("watchList"))||[]);
 
   const getMainPageData = async () => {
     const providerId = [8, 230, 337, 350];
@@ -29,10 +29,10 @@ function App() {
     setMoviePopul(newdata)
   }
 
-
   useEffect(() => {
     getMainPageData();
   }, [])
+
   const getSearchMovies = (queryStr) => {
     const APIkey = '7b94aeb4b9c0dd930c28ea14fa3c1fcb'
     const url = `https://api.themoviedb.org/3/discover/tv?api_key=${APIkey}&language=en-CA&query=${queryStr}&page=1`
@@ -62,12 +62,13 @@ function App() {
       let index = watchList.findIndex((item) => {
       return item.id === movie.id;
     })
-    if (index === -1) { tempList = [...watchList, movie]; } 
+    if (index === -1) { 
+      tempList = [...watchList, movie] } 
     else {
       tempList.splice(index,1)
     }
     setWatchList(tempList)
-    localStorage.setItem('watchList', JSON.stringify(watchList))
+    localStorage.setItem('watchList', JSON.stringify(tempList))
     // console.log(watchList);
   }
 

@@ -1,7 +1,6 @@
 import Movie from './movie';
 const WatchList = ({watchList,handleWatch}) => {
     console.log(watchList);
- 
     return (
         <>
             <div className="titleList">
