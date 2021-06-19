@@ -12,14 +12,19 @@ function App() {
     const providerId = [8, 230, 337, 350];
     const APIkey = '7b94aeb4b9c0dd930c28ea14fa3c1fcb'
     const urlPopul = `https://api.themoviedb.org/3/discover/tv?api_key=${APIkey}&language=en-CA&sort_by=popularity.des&watch_region=CA`;
-    const mainURL = `${urlPopul}&with_watch_providers=${providerId[1]}`
-    fetch(mainURL).then((data) => data.json())
-      .then((data) => {
-          console.log(data.results);
-        let newAry=data.results
-        setMoviesPopul({ newAry })
-      
-      })
+    try {
+      const res = await Promise.all([
+        fetch(`${urlPopul}&with_watch_providers=${providerId[0]}`),
+        fetch(`${urlPopul}&with_watch_providers=${providerId[1]}`),
+        fetch(`${urlPopul}&with_watch_providers=${providerId[2]}`),
+        fetch(`${urlPopul}&with_watch_providers=${providerId[3]}`)
+      ]);
+      const movieAll = await Promise.all(res.map(r => r.json()))
+      console.log(movieAll);
+    } catch {
+      throw Error("Promise failed");
+    }
+  };
   }
   useEffect(() => {
     getMainPageData();
