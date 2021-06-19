@@ -5,33 +5,36 @@ import MovieList from './components/movieList';
 import WatchList from './components/watchList'
 function App() {
   const [query, setQuery] = useState('');
-  const [moviesPopul, setMoviesPopul] = useState([]);
+  const [moviePopul, setMoviePopul] = useState([]);
   const [searchMovies, setSearchMovies] = useState([]);
 
   const getMainPageData = async () => {
     const providerId = [8, 230, 337, 350];
     const APIkey = '7b94aeb4b9c0dd930c28ea14fa3c1fcb'
     const urlPopul = `https://api.themoviedb.org/3/discover/tv?api_key=${APIkey}&language=en-CA&sort_by=popularity.des&watch_region=CA`;
-    try {
+    // fetch(mainURL).then((data) => data.json())
+    //   .then((data) => {
+    //       console.log(data.results);
+    //     let newAry=data.results
+    //     setMoviesPopul({ newAry })
+    //   })
       const res = await Promise.all([
         fetch(`${urlPopul}&with_watch_providers=${providerId[0]}`),
         fetch(`${urlPopul}&with_watch_providers=${providerId[1]}`),
         fetch(`${urlPopul}&with_watch_providers=${providerId[2]}`),
         fetch(`${urlPopul}&with_watch_providers=${providerId[3]}`)
       ]);
-      const movieAll = await Promise.all(res.map(r => r.json()))
-      console.log(movieAll);
-    } catch {
-      throw Error("Promise failed");
-    }
+      const data = await Promise.all(res.map(r => r.json()))
+      console.log(data.results);
+      setMoviePopul(data.results)
   };
-  }
+  
   useEffect(() => {
     getMainPageData();
   }, [])
   const getSearchMovies = (queryStr) => {
     const APIkey = '7b94aeb4b9c0dd930c28ea14fa3c1fcb'
-    const url = `https://api.themoviedb.org/3/search/movie?api_key=${APIkey}&language=en-US&query=${queryStr}&page=1`
+    const url = `https://api.themoviedb.org/3/discover/tv?api_key=${APIkey}&language=en-CA&query=${queryStr}&page=1`
     fetch(url)
       .then((data) => data.json())
       .then((data) => {
@@ -54,8 +57,8 @@ function App() {
       getSearchMovies(queryTemp);
     }
   }
-  const handleFavor = (id) => {
-
+  const handleWatch = (movie) => {
+console.log(movie);
   }
 
   return (<>
@@ -68,15 +71,18 @@ function App() {
 
       <SearchResults
         searchMovies={searchMovies}
-        handChangeFavor={handleFavor}
+        handleWatch={handleWatch}
       />
 
       <MovieList
-        moviesPopul={moviesPopul}
-        handChangeFavor={handleFavor}
+        moviePopul={moviePopul}
+        handleWatch={handleWatch}
       />
 
-      <WatchList />
+      <WatchList 
+        watchList={watchList}
+        handleWatch={handleWatch}
+      />
     </div>
   </>
   )

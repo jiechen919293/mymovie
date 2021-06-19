@@ -1,5 +1,5 @@
 import Movie from './movie';
-const WatchList = () => {
+const WatchList = (watchList,handleWatch) => {
     let testMovie = [{
         "adult": false,
         "backdrop_path": "/9VEOQvCnd8T8wILgyqjKgyhALw4.jpg",
@@ -63,7 +63,7 @@ const WatchList = () => {
                                 <Movie key={movie.id}
                                     movie={movie}
                                 // favourite={favouriteList.includes(movie.id)}
-                                // handleChangeFavor={handleChangeFavor}
+                                handleWatch={handleWatch}
                                 />)
                         })}
                     </div>

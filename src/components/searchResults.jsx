@@ -1,7 +1,7 @@
 
 import Movie from './movie';
 
-const SearchResults = ({searchMovies,handleChangeFavor}) => {
+const SearchResults = ({searchMovies,handleWatch}) => {
     return (<>
         <div className="titleList">
             <div className="title">
@@ -11,8 +11,8 @@ const SearchResults = ({searchMovies,handleChangeFavor}) => {
                         return (
                             <Movie key={movie.id} 
                             movie={movie} 
-                            // favourite={favouriteList.includes(movie.id)}
-                            // handleChangeFavor={handleChangeFavor}
+                            // flag={favouriteList.includes(movie.id)}
+                             handleWatch={handleWatch}
                                  />)
                     })}
                 </div>

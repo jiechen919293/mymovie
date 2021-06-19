@@ -1,5 +1,5 @@
 
-const Movie = ({ movie, favourite, handleChangeFavor }) => {
+const Movie = ({ movie, flag,handleWatch }) => {
     return (<>
         <div className="movie">
             <a href="/details/94951">
@@ -10,9 +10,9 @@ const Movie = ({ movie, favourite, handleChangeFavor }) => {
                     <div className="plot">{movie.overview}</div>
                 </div>
             </a>
-            <div data-toggled={favourite}
+            <div data-toggled={flag}
                 className="listToggle">
-                <div onClick={() => handleChangeFavor(movie.id)}>
+                <div onClick={() => handleWatch(movie)}>
                     <i className="fa fa-fw fa-plus"></i><i className="fa fa-fw fa-check"></i>
                 </div>
             </div>
