@@ -1,13 +1,8 @@
 import{Link} from 'react-router-dom'
 const Movie = ({ movie, watchList,handleWatch }) => {
-let flag='false';
-if(watchList){
-  let index=watchList.indexOf((item) => item.id === movie.id)  
-     if(index){
-         flag='ture'; 
-     } 
-}
 
+let testWatch=[]
+if(watchList){ testWatch=watchList}
     return (<>
         <div className="movie">
             <Link to={{path:`/details/${movie.id}`,query:{movie}}} >
@@ -19,7 +14,7 @@ if(watchList){
                 </div>
             </Link>
             <div 
-                data-toggled={flag}
+                data-toggled={testWatch.find((x)=>{return x.id===movie.id})?"true":"false"}
                 className="listToggle">
                 <div onClick={() => handleWatch(movie)}>
                     <i className="fa fa-fw fa-plus"></i><i className="fa fa-fw fa-check"></i>
