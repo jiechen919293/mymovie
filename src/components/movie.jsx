@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom'
-const Movie = ({ movie, watchList,handleWatch }) => {
-
+const Movie = ({ movie,handleWatch }) => {
+    const watchList = JSON.parse(localStorage.getItem("watchList")) || [];
 let testWatch=[]
 if(watchList){ testWatch=watchList}
 const data=movie;

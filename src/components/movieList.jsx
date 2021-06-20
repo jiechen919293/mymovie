@@ -1,5 +1,5 @@
 import Movie from './movie';
-const MovieList = ({ moviePopul,watchList,handleWatch }) => {
+const MovieList = ({ moviePopul,handleWatch }) => {
     const providers = ['Netflix', 'Crave', 'Disney', 'Apple Plus']
     let testmovie = moviePopul;
     if(!moviePopul){ testmovie=[]}
@@ -14,7 +14,6 @@ const MovieList = ({ moviePopul,watchList,handleWatch }) => {
                                 return (
                                     <Movie key={movie.id}
                                         movie={movie}
-                                        watchList={watchList}
                                         handleWatch={handleWatch}
                                     />)
                             })}</div>

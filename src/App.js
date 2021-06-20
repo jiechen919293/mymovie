@@ -7,13 +7,15 @@ import WatchList from './components/watchList'
 import Details from './components/details'
 
 function App() {
+
+  //state part
   const [query, setQuery] = useState('');
   const [moviePopul, setMoviePopul] = useState([]);
   const [searchMovies, setSearchMovies] = useState([]);
   const [watchList, setWatchList] = useState(JSON.parse(localStorage.getItem("watchList")) || []);
-  const history=useHistory();
-  
+  const history = useHistory();
 
+  //function for main page
   const getMainPageData = async () => {
     const providerId = [8, 230, 337, 350];
     const APIkey = '7b94aeb4b9c0dd930c28ea14fa3c1fcb'
@@ -33,12 +35,16 @@ function App() {
     setMoviePopul(newdata)
   }
 
+  //use effect
   useEffect(() => {
     getMainPageData();
   }, [])
+
   useEffect(() => {
     localStorage.setItem('watchList', JSON.stringify(watchList))
   }, [watchList])
+
+  //search API data
   const getSearchMovies = (queryStr) => {
     const APIkey = '7b94aeb4b9c0dd930c28ea14fa3c1fcb'
     const url = `https://api.themoviedb.org/3/search/tv?api_key=${APIkey}&language=en-CA&page=1&query=${queryStr}`
@@ -46,13 +52,14 @@ function App() {
       .then((data) => data.json())
       .then((data) => {
         if (data) {
-          console.log(data.results);
+          // console.log(data.results);
           setSearchMovies(data.results);
           setQuery('')
         }
       })
   }
 
+  //hanle change input
   const handleChange = (e) => {
     setQuery(e.target.value)
   }
@@ -62,10 +69,11 @@ function App() {
     const queryTemp = e.target[0].value.trim();
     if (queryTemp) {
       getSearchMovies(queryTemp);
-history.push({pathname:'/search',search:queryTemp})
+      history.push({ pathname: '/search', search: queryTemp })
     }
   }
 
+  //handle select watch icon
   const handleWatch = (movie) => {
     let tempList = [...watchList];
     let index = watchList.findIndex((item) => {
@@ -91,37 +99,32 @@ history.push({pathname:'/search',search:queryTemp})
       />
       <Switch>
         <Route exact path='/'>
-
           <MovieList
-            watchList={watchList}
             moviePopul={moviePopul}
             handleWatch={handleWatch}
           />
         </Route>
       </Switch>
+
       <Switch>
         <Route path='/search'>
           <SearchResults
-            watchList={watchList}
             searchMovies={searchMovies}
             handleWatch={handleWatch}
           />
         </Route>
       </Switch>
+
       <Switch>
         <Route path='/my-watch-list'>
           <WatchList
-            watchList={watchList}
             handleWatch={handleWatch}
           />
         </Route>
       </Switch>
+      
       <Switch>
         <Route path='/details' component={Details}>
-          {/* <Details
-            watchList={watchList}
-            handleWatch={handleWatch}
-          /> */}
         </Route>
       </Switch>
     </div>

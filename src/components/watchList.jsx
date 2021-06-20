@@ -1,6 +1,6 @@
 import Movie from './movie';
-const WatchList = ({watchList,handleWatch}) => {
-    console.log(watchList);
+const WatchList = ({handleWatch}) => {
+    const watchList=JSON.parse(localStorage.getItem("watchList")) || [];
     return (
         <>
             <div className="titleList">
@@ -11,7 +11,6 @@ const WatchList = ({watchList,handleWatch}) => {
                             return (
                                 <Movie key={movie.id}
                                     movie={movie}
-                                watchList={watchList}
                                 handleWatch={handleWatch}
                                 />)
                         })}
