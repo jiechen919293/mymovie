@@ -1,11 +1,17 @@
-import{Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 const Movie = ({ movie, watchList,handleWatch }) => {
 
 let testWatch=[]
 if(watchList){ testWatch=watchList}
+const data=movie;
+const path={
+    pathname:'/details',
+    query:data
+}
+
     return (<>
         <div className="movie">
-            <Link to={{path:`/details/${movie.id}`,query:{movie}}} >
+            <Link to={path} >
                 <img src={movie.poster_path ? `https://image.tmdb.org/t/p/original/${movie.poster_path}` : `./image-not-available.jpg`} alt="Movie Poster" />
                 <div className="overlay">
                     <div className="title">{movie.title}</div>

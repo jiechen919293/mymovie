@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Switch,useHistory } from 'react-router-dom'
+import { Route, Switch, useHistory } from 'react-router-dom'
 import Header from './components/header';
 import SearchResults from './components/searchResults';
 import MovieList from './components/movieList';
@@ -11,7 +11,8 @@ function App() {
   const [moviePopul, setMoviePopul] = useState([]);
   const [searchMovies, setSearchMovies] = useState([]);
   const [watchList, setWatchList] = useState(JSON.parse(localStorage.getItem("watchList")) || []);
-const history=useHistory();
+  const history=useHistory();
+  
 
   const getMainPageData = async () => {
     const providerId = [8, 230, 337, 350];
@@ -53,6 +54,7 @@ const history=useHistory();
   const handleChange = (e) => {
     setQuery(e.target.value)
   }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const queryTemp = e.target[0].value.trim();
@@ -61,6 +63,7 @@ const history=useHistory();
 history.push({pathname:'/search',search:queryTemp})
     }
   }
+
   const handleWatch = (movie) => {
     let tempList = [...watchList];
     let index = watchList.findIndex((item) => {
@@ -112,11 +115,11 @@ history.push({pathname:'/search',search:queryTemp})
         </Route>
       </Switch>
       <Switch>
-        <Route path='/details'>
-          <Details
+        <Route path='/details' component={Details}>
+          {/* <Details
             watchList={watchList}
             handleWatch={handleWatch}
-          />
+          /> */}
         </Route>
       </Switch>
     </div>
