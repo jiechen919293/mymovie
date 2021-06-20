@@ -38,7 +38,7 @@ const history=useHistory();
 
   const getSearchMovies = (queryStr) => {
     const APIkey = '7b94aeb4b9c0dd930c28ea14fa3c1fcb'
-    const url = `https://api.themoviedb.org/3/discover/tv?api_key=${APIkey}&language=en-CA&query=${queryStr}&page=1`
+    const url = `https://api.themoviedb.org/3/search/tv?api_key=${APIkey}&language=en-CA&page=1&query=${queryStr}`
     fetch(url)
       .then((data) => data.json())
       .then((data) => {
