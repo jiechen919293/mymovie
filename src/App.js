@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch,useHistory } from 'react-router-dom'
 import Header from './components/header';
 import SearchResults from './components/searchResults';
 import MovieList from './components/movieList';
 import WatchList from './components/watchList'
 import Details from './components/details'
+
 function App() {
   const [query, setQuery] = useState('');
   const [moviePopul, setMoviePopul] = useState([]);
   const [searchMovies, setSearchMovies] = useState([]);
-  const [watchList, setWatchList] = useState(JSON.parse(localStorage.getItem("watchList"))||[]);
+  const [watchList, setWatchList] = useState(JSON.parse(localStorage.getItem("watchList")) || []);
+const history=useHistory();
 
   const getMainPageData = async () => {
     const providerId = [8, 230, 337, 350];
@@ -56,17 +58,19 @@ function App() {
     const queryTemp = e.target[0].value.trim();
     if (queryTemp) {
       getSearchMovies(queryTemp);
+history.push({pathname:'/search',search:queryTemp})
     }
   }
   const handleWatch = (movie) => {
-      let tempList = [...watchList];
-      let index = watchList.findIndex((item) => {
+    let tempList = [...watchList];
+    let index = watchList.findIndex((item) => {
       return item.id === movie.id;
     })
-    if (index === -1) { 
-      tempList = [...watchList, movie] } 
+    if (index === -1) {
+      tempList = [...watchList, movie]
+    }
     else {
-      tempList.splice(index,1)
+      tempList.splice(index, 1)
     }
     setWatchList(tempList)
     localStorage.setItem('watchList', JSON.stringify(tempList))
@@ -82,11 +86,6 @@ function App() {
       />
       <Switch>
         <Route exact path='/'>
-          <SearchResults
-            watchList={watchList}
-            searchMovies={searchMovies}
-            handleWatch={handleWatch}
-          />
 
           <MovieList
             watchList={watchList}
@@ -95,7 +94,15 @@ function App() {
           />
         </Route>
       </Switch>
-
+      <Switch>
+        <Route path='/search'>
+          <SearchResults
+            watchList={watchList}
+            searchMovies={searchMovies}
+            handleWatch={handleWatch}
+          />
+        </Route>
+      </Switch>
       <Switch>
         <Route path='/my-watch-list'>
           <WatchList

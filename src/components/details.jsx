@@ -1,4 +1,6 @@
+import {useLocation} from "react-router-dom"
 const Details = ({watchList,handleWatch}) => {
+    const location=useLocation()
     const movie=location.state;
     console.log(movie);
     return (

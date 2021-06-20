@@ -1,9 +1,11 @@
 import{Link} from 'react-router-dom'
 const Movie = ({ movie, watchList,handleWatch }) => {
 let flag='false';
-let index=watchList.indexOf((item) => item.id === movie.id)
-if(watchList&&(index!==-1)){
-       flag='ture';
+if(watchList){
+  let index=watchList.indexOf((item) => item.id === movie.id)  
+     if(index){
+         flag='ture'; 
+     } 
 }
 
     return (<>
