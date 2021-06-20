@@ -11,7 +11,7 @@ const WatchList = ({watchList,handleWatch}) => {
                             return (
                                 <Movie key={movie.id}
                                     movie={movie}
-                                // favourite={favouriteList.includes(movie.id)}
+                                watchList={watchList}
                                 handleWatch={handleWatch}
                                 />)
                         })}
