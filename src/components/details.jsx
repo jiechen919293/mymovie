@@ -1,13 +1,15 @@
-const Detail = () => {
+const Details = ({watchList,handleWatch}) => {
+    const movie=location.state;
+    console.log(movie);
     return (
         <div class="show-details">
-            <img src="https://image.tmdb.org/t/p/original/daXzoOWNBwSoG03RFh5tEqzl1sH.jpg" alt="" />
+            <img src={movie.poster_path ? `https://image.tmdb.org/t/p/original/${movie.poster_path}` : `./image-not-available.jpg`} alt="post movie" />
             <div class="show-details-inner">
-                <h1>Love, Death &amp; Robots</h1>
+                <h1>{movie.title}</h1>
                 <div class="description">
-                    Terrifying creatures, wicked surprises and dark comedy converge in this NSFW anthology of animated stories presented by Tim Miller and David
-                    Fincher.
+                    {movie.overview}
                 </div>
+                
                 <button class="add-to-watchlist">+ Add to watch list</button>
                 <button class="remove-to-watchlist">- Remove from watch list</button>
             </div>
@@ -15,4 +17,4 @@ const Detail = () => {
     );
 }
 
-export default Detail;
+export default Details;

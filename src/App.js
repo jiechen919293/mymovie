@@ -4,6 +4,7 @@ import Header from './components/header';
 import SearchResults from './components/searchResults';
 import MovieList from './components/movieList';
 import WatchList from './components/watchList'
+import Details from './components/details'
 function App() {
   const [query, setQuery] = useState('');
   const [moviePopul, setMoviePopul] = useState([]);
@@ -98,6 +99,14 @@ function App() {
       <Switch>
         <Route path='/my-watch-list'>
           <WatchList
+            watchList={watchList}
+            handleWatch={handleWatch}
+          />
+        </Route>
+      </Switch>
+      <Switch>
+        <Route path='/details'>
+          <Details
             watchList={watchList}
             handleWatch={handleWatch}
           />
