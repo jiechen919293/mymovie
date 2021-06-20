@@ -1,7 +1,7 @@
 
 import Movie from './movie';
 
-const SearchResults = ({searchMovies,handleWatch}) => {
+const SearchResults = ({searchMovies,watchList,handleWatch}) => {
     return (<>
         <div className="titleList">
             <div className="title">
@@ -11,7 +11,7 @@ const SearchResults = ({searchMovies,handleWatch}) => {
                         return (
                             <Movie key={movie.id} 
                             movie={movie} 
-                            // flag={favouriteList.includes(movie.id)}
+                            watchList={watchList}
                              handleWatch={handleWatch}
                                  />)
                     })}
