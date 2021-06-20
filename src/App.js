@@ -36,7 +36,9 @@ function App() {
   useEffect(() => {
     getMainPageData();
   }, [])
-
+  useEffect(() => {
+    localStorage.setItem('watchList', JSON.stringify(watchList))
+  }, [watchList])
   const getSearchMovies = (queryStr) => {
     const APIkey = '7b94aeb4b9c0dd930c28ea14fa3c1fcb'
     const url = `https://api.themoviedb.org/3/search/tv?api_key=${APIkey}&language=en-CA&page=1&query=${queryStr}`
