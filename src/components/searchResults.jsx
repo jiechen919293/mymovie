@@ -1,8 +1,11 @@
-
 import Movie from './movie';
 
+
+
 const SearchResults = ({searchMovies,handleWatch}) => {
+    //get localdata
     const watchList = JSON.parse(localStorage.getItem("watchList")) || [];
+
     return (<>
         <div className="titleList">
             <div className="title">

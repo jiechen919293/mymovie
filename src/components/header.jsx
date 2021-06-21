@@ -1,4 +1,7 @@
 import { Link } from 'react-router-dom';
+
+
+
 const Header = (props) => {
 
     return (
@@ -15,7 +18,7 @@ const Header = (props) => {
                 onSubmit={props.handleSubmit}
             >
                 <input type="search"
-                    placeholder="Search for a title..."
+                    placeholder="Happy Father's Day ^-^"
                     value={props.value}
                     onChange={props.handleChange}
                 />

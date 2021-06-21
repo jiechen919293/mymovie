@@ -1,8 +1,13 @@
 import Movie from './movie';
+
+
+
 const MovieList = ({ moviePopul,handleWatch }) => {
+    //set provider and test
     const providers = ['Netflix', 'Crave', 'Disney', 'Apple Plus']
     let testmovie = moviePopul;
     if(!moviePopul){ testmovie=[]}
+    
     return (<>
         {providers.map((provider, index) => {
             return (

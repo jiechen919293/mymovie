@@ -1,13 +1,17 @@
-import {Link} from 'react-router-dom'
-const Movie = ({ movie,handleWatch }) => {
+import { Link } from 'react-router-dom'
+
+
+
+const Movie = ({ movie, handleWatch }) => {
+    //get localdata
     const watchList = JSON.parse(localStorage.getItem("watchList")) || [];
-let testWatch=[]
-if(watchList){ testWatch=watchList}
-const data=movie;
-const path={
-    pathname:'/details',
-    query:data
-}
+    let testWatch = []
+    if (watchList) { testWatch = watchList }
+    const data = movie;
+    const path = {
+        pathname: '/details',
+        query: data
+    }
 
     return (<>
         <div className="movie">
@@ -19,8 +23,8 @@ const path={
                     <div className="plot">{movie.overview}</div>
                 </div>
             </Link>
-            <div 
-                data-toggled={testWatch.find((x)=>{return x.id===movie.id})?"true":"false"}
+            <div
+                data-toggled={testWatch.find((x) => { return x.id === movie.id }) ? "true" : "false"}
                 className="listToggle">
                 <div onClick={() => handleWatch(movie)}>
                     <i className="fa fa-fw fa-plus"></i><i className="fa fa-fw fa-check"></i>

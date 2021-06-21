@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
+
+
+
 const Details = (props) => {
+
+    //set initial value 
     const [watchList, setWatchList] = useState(JSON.parse(localStorage.getItem("watchList")) || []);
+    let movie = props.location.query || {};
 
-//set initial value
-    let movie = props.location.query || {}
-
-//function for handle watchlist
+    //function for handle watchlist
     const handleWatch = (movie) => {
         let tempList = [...watchList];
         let index = watchList.findIndex((item) => {
@@ -21,10 +24,11 @@ const Details = (props) => {
         localStorage.setItem('watchList', JSON.stringify(tempList))
     }
 
- //use effect on detail page
+    //use effect on detail page
     useEffect(() => {
-        localStorage.setItem('watchList', JSON.stringify(watchList))}, [watchList])
-        
+        localStorage.setItem('watchList', JSON.stringify(watchList))
+    }, [watchList])
+
     return (
         <div className="show-details">
             <img src={movie.poster_path ? `https://image.tmdb.org/t/p/original/${movie.backdrop_path}` : `./image-not-available.jpg`} alt="post movie" />

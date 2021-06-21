@@ -6,8 +6,10 @@ import MovieList from './components/movieList';
 import WatchList from './components/watchList'
 import Details from './components/details'
 
-function App() {
 
+
+function App() {
+  
   //state part
   const [query, setQuery] = useState('');
   const [moviePopul, setMoviePopul] = useState([]);
@@ -15,7 +17,7 @@ function App() {
   const [watchList, setWatchList] = useState(JSON.parse(localStorage.getItem("watchList")) || []);
   const history = useHistory();
 
-  //function for main page
+  //for main-page
   const getMainPageData = async () => {
     const providerId = [8, 230, 337, 350];
     const APIkey = '7b94aeb4b9c0dd930c28ea14fa3c1fcb'
@@ -35,7 +37,7 @@ function App() {
     setMoviePopul(newdata)
   }
 
-  //use effect
+  //use effects
   useEffect(() => {
     getMainPageData();
   }, [])
@@ -59,7 +61,7 @@ function App() {
       })
   }
 
-  //hanle change input
+  //hanle change and input
   const handleChange = (e) => {
     setQuery(e.target.value)
   }
